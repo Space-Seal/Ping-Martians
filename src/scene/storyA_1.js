@@ -39,6 +39,9 @@ var SceneStoryA1 = new Phaser.Class({
 		fsapp.on('pointerdown', function (event) {
 			this.scene.transition({ target: 'sceneBinaryGame', duration: 0});
 		}, this);
+		mbapp.on('pointerdown', function (event) {
+			this.scene.transition({ target: 'sceneGameC', duration: 0});
+		}, this);
 		machine2.on('pointerdown', function (event) {
 			this.scene.transition({ target: 'sceneMachine2', duration: 0});
 		}, this);
@@ -53,6 +56,7 @@ var SceneStoryA1 = new Phaser.Class({
 		}, this);
 
 		fsapp.setInteractive({ cursor: 'pointer' });
+		mbapp.setInteractive({ cursor: 'pointer' });
 		machine2.setInteractive({ cursor: 'pointer' });
 		machine3.setInteractive({ cursor: 'pointer' });
 		obapp.setInteractive({ cursor: 'pointer' });
