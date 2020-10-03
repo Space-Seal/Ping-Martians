@@ -48,9 +48,14 @@ var SceneStoryA1 = new Phaser.Class({
 		obapp.on('pointerdown', function (event) {
 			this.scene.transition({ target: 'sceneStarmap', duration: 0});
 		}, this);
-		fsapp.setInteractive({ cursor: 'pointer' })
-		machine2.setInteractive({ cursor: 'pointer' })
-		machine3.setInteractive({ cursor: 'pointer' })
-		obapp.setInteractive({ cursor: 'pointer' })
+		ads[0].on('pointerdown', function (event) {
+			window.open("https://www.nasa.gov");
+		}, this);
+
+		fsapp.setInteractive({ cursor: 'pointer' });
+		machine2.setInteractive({ cursor: 'pointer' });
+		machine3.setInteractive({ cursor: 'pointer' });
+		obapp.setInteractive({ cursor: 'pointer' });
+		ads[0].setInteractive({ cursor: 'pointer' });
 	}
 });
