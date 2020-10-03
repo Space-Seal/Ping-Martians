@@ -48,6 +48,7 @@ var SceneBinaryGame = new Phaser.Class({
 		var text2Send = this.add.text(875, 670, inputVal,{'fontSize': '16px', 'color': '#fff'});
 		systemLogText = this.add.text(875, 200, "",{'fontSize': '16px', 'color': '#fff'}).setOrigin(0, 0);
 		transmitTimeText = this.add.text(860, 170, "Estimated reply time:",{'fontSize': '12px', 'color': '#fff'}).setOrigin(0, 0);
+		
 		// event handles
 		btnExit.on('pointerdown', function (event) {
 			this.scene.transition({ target: 'sceneStoryA1', duration: 0});
