@@ -21,7 +21,6 @@ var SceneGameC = new Phaser.Class({
 
 	create: function ()
 	{
-
 		//Setting Update Timer
 	    var timer = this.time.addEvent({
 		    delay: 500,                // ms
@@ -33,19 +32,11 @@ var SceneGameC = new Phaser.Class({
 
 		var bbg_gameAgg = this.add.image(0, 0, 'bg_gameC').setOrigin(0).setScale(0.711);
 		var eleMsgBox = this.add.dom(400, 200).createFromCache('msgbox');
+		// eleMsgBox.setPerspective(800);
 		eleMsgBox.addListener('click');
     	eleMsgBox.on('click', function (event) {});
 
-
-
-
-
-
-
-
-
-
-
+		this.tweens.add({targets: eleMsgBox, y: 300, duration: 3000, ease: 'Power3'});
 
 
 
@@ -97,7 +88,7 @@ var SceneGameC = new Phaser.Class({
 		for(obj of gtc.list()){
 			var ETA = Math.round((obj.timestamp + obj.delay - new Date().getTime())/1000);
 			msgBoxText.setText(msgBoxText.text+obj.data+"\t\tETA: "+ETA+"sec\n");
-		}
+		};
 	}
 
 });
