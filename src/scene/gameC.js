@@ -85,7 +85,7 @@ var SceneGameC = new Phaser.Class({
 		btnS.on('pointerdown', function (event) {
 			if (CalcRemainTime() != 0){
 				if (/^\d+$/.test(inputNum.split(" ")[1])){
-					gtc.add('gameC', CalcRemainTime()*10, inputNum, function(data){gameC_progress1(data);})
+					gtc.add('gameC', CalcRemainTime()*1000, inputNum, function(data){gameC_progress1(data);})
 				}else{
 					gtc.add('gameC',10000, "Transmission failed: insufficient bandwidth (digits only)", function(data){})
 			}}else{
