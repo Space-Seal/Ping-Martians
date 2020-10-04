@@ -23,7 +23,7 @@
 //     show gameC_MSG6
 var currentGameProgress = 0
 if (localStorage.getItem("currentGameProgress") != null){
-	var inputVal = localStorage.getItem("currentGameProgress");
+	var currentGameProgress = localStorage.getItem("currentGameProgress");
 }
 /*	Example:
 
@@ -47,7 +47,7 @@ var gameA_OS3 = "Ah! It's binary input.\n\nI can convert 27 into binary numbers.
 var gameA_OS4 = "Oooops, I sent the wrong data."
 var gameA_OS5 = "Perfect!\n\nNASA is sending someone to help me \n\nsolve the power issue."
 
-var gameC_MSG1 = "How's everything. I heard you just saved the Mars base by communication with binary."
+var gameC_MSG1 = "How's everything? I heard you just saved the Mars base by communication with binary."
 var gameC_MSG2 = "Ah, I forget that the communication is limited to numbers only.\n\n(001)I'm fine\n(002)I'm worried\n(003)I'm happy"
 var gameC_MSG3 = "??\n\n(001)I'm fine\n(002)I'm worried\n(003)I'm happy"
 var gameC_MSG4 = "Just remember that I'm always by your side. I love you.\n\n (001)Love you, too."

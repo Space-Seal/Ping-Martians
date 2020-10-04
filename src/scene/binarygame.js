@@ -52,7 +52,6 @@ var SceneBinaryGame = new Phaser.Class({
 		    loop: true
 		});
 
-		var bg_gameA = this.add.image(0, 0, 'bg_gameA').setOrigin(0).setScale(0.711);
 		
 		if (localStorage.getItem("inputVal") == null){
 			inputVal = "> ";	//first played, init
@@ -60,6 +59,7 @@ var SceneBinaryGame = new Phaser.Class({
 			var inputVal = localStorage.getItem("inputVal");
 		}
 
+		var bg_gameA = this.add.image(0, 0, 'bg_gameA').setOrigin(0).setScale(0.711);
 		var btnExit = this.add.rectangle(1280, 60, 20, 20, 0xff0000, 0);
 		var btn0 = this.add.image(670, 230, 'button0').setScale(0.8);
 		var btn1 = this.add.image(770, 230, 'button1').setScale(0.8);
