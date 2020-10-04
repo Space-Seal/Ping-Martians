@@ -44,6 +44,18 @@ var StarmapDATA = {
 		// spinRate:355.23,
 	},
 
+	sat:{
+		obj: 0,
+		x: 0,
+		y: 0,
+		r: 0.5,
+		angvel: 355.23,
+		theta: 0,
+		spinRate:355.23,
+		angoffset:70,
+		// spinRate:355.23,
+	},
+
 	epochStart:1600000000000,
 	epochdt: 2, //ms
 	planet_timescale: 0.00007,
@@ -135,7 +147,7 @@ var SceneStarmap = new Phaser.Class({
 		this.load.image('earth', 'assets/earth.png');
 		this.load.image('base', 'assets/base.png');
 		this.load.image('cross', 'assets/cross.png');
-
+		this.load.image('sat',	'assets/OrbitSat.png');
 	},
 
 	create: function ()
@@ -202,6 +214,12 @@ var SceneStarmap = new Phaser.Class({
 	   	StarmapDATA.base.obj = this.add.sprite(StarmapDATA.base.x, StarmapDATA.base.y, 'base');
 	   	StarmapDATA.base.obj.setScale(0.07,0.07);
 
+	   	//print satellite
+	   	StarmapDATA.sat.x = StarmapDATA.mars.x;
+	   	StarmapDATA.sat.y = StarmapDATA.mars.y;
+	   	StarmapDATA.sat.obj = this.add.sprite(StarmapDATA.sat.x, StarmapDATA.sat.y, 'sat');
+	   	StarmapDATA.sat.obj.setScale(0.1,0.1).setOrigin(0.6,0.6);
+
 
 		btnExit.on('pointerdown', function (event) {
 			this.scene.transition({ target: 'sceneStoryA1', duration: 0});
@@ -235,6 +253,11 @@ var SceneStarmap = new Phaser.Class({
 	   	StarmapDATA.base.y = StarmapDATA.mars.y + StarmapDATA.base.r * StarmapDATA.au2screen * Math.sin(epoch2rad(epochms,StarmapDATA.base.angvel));
 
 	   	StarmapDATA.base.obj.angle = (-1)*(epochms - StarmapDATA.epochStart) * StarmapDATA.base.spinRate * StarmapDATA.planet_timescale - StarmapDATA.base.angoffset; //counter clock wise
+
+	   	StarmapDATA.sat.x = StarmapDATA.mars.x;
+	   	StarmapDATA.sat.y = StarmapDATA.mars.y;
+
+	   	StarmapDATA.sat.obj.angle = (-1)*(epochms - StarmapDATA.epochStart) * StarmapDATA.sat.spinRate * StarmapDATA.planet_timescale - StarmapDATA.sat.angoffset; //counter clock wise
 
 	   	StarmapDATA.sun.obj.angle = (-1)*(epochms - StarmapDATA.epochStart) * StarmapDATA.sun.spinRate * StarmapDATA.planet_timescale; //counter clock wise
 
@@ -286,6 +309,8 @@ var SceneStarmap = new Phaser.Class({
 	   	StarmapDATA.mars.obj.y = StarmapDATA.mars.y;
 	   	StarmapDATA.base.obj.x = StarmapDATA.base.x;
 	   	StarmapDATA.base.obj.y = StarmapDATA.base.y;
+	   	StarmapDATA.sat.obj.x = StarmapDATA.sat.x;
+	   	StarmapDATA.sat.obj.y = StarmapDATA.sat.y;
 	}
 
 });
