@@ -1,5 +1,26 @@
 var systemLogText;
 var transmitTimeText;
+var baseStatText;
+var OSText;
+function gameA_progress1(whichBtn) {
+	if(currentGameProgress>=13){
+		currentGameProgress = currentGameProgress;
+	}else if(whichBtn==3){
+		currentGameProgress = 9;
+	}else if(currentGameProgress>=10){
+		currentGameProgress = currentGameProgress;
+	}else if (whichBtn==0 && currentGameProgress==5){
+		currentGameProgress = 10;
+	}else if (whichBtn==1 && currentGameProgress==4){
+		currentGameProgress = 10;
+	}else if (whichBtn == 0){
+		currentGameProgress = 4;
+	}else if (whichBtn == 1){
+		currentGameProgress = 5;
+	}
+	console.log("currentGameProgress: "+currentGameProgress)
+}
+
 
 var SceneBinaryGame = new Phaser.Class({
 
@@ -48,7 +69,8 @@ var SceneBinaryGame = new Phaser.Class({
 		var text2Send = this.add.text(875, 670, inputVal,{'fontSize': '16px', 'color': '#fff'});
 		systemLogText = this.add.text(875, 200, "",{'fontSize': '16px', 'color': '#fff'}).setOrigin(0, 0);
 		transmitTimeText = this.add.text(860, 170, "Estimated reply time:",{'fontSize': '12px', 'color': '#fff'}).setOrigin(0, 0);
-		
+		baseStatText = this.add.text(170,400, "Base Electrical Power Storage: 27%\nMars-Earth Communication Signal: BAD\nCurrent Distance to Earth:", {'fontSize': '16px', 'color': '#f00'}).setOrigin(0, 0);
+		OSText = this.add.text(400,550, gameA_OS1, {'fontSize': '16px', 'color': '#000'}).setOrigin(0, 0);
 		// event handles
 		btnExit.on('pointerdown', function (event) {
 			this.scene.transition({ target: 'sceneStoryA1', duration: 0});
@@ -58,11 +80,13 @@ var SceneBinaryGame = new Phaser.Class({
             inputVal += "0";
 			text2Send.setText(inputVal);
 			localStorage.setItem("inputVal", inputVal);
+			gameA_progress1(0);
 		}, this);
         btn1.on('pointerdown', function (event) {
 			inputVal += "1";
 			text2Send.setText(inputVal);
 			localStorage.setItem("inputVal", inputVal);
+			gameA_progress1(1);
 		}, this);
 		btnC.on('pointerdown', function (event) {
 			inputVal = "> ";
@@ -71,7 +95,7 @@ var SceneBinaryGame = new Phaser.Class({
 		}, this);
 		btnS.on('pointerdown', function (event) {
 			if (CalcRemainTime() != 0){
-				gtc.add('gameA', CalcRemainTime()*1000, inputVal, function(data){if(data == "> 011"){console.log('success');}else{console.log('fail');}})
+				gtc.add('gameA', CalcRemainTime()*10, inputVal, function(data){if(data == "> 11011"){console.log('success');currentGameProgress=15;}else{console.log('fail');currentGameProgress=13;}})
 			}else{
 				gtc.add('gameA',10000, "Transmission failed: connection lost\n(Earth out of sight)", function(data){})
 			}
@@ -85,6 +109,9 @@ var SceneBinaryGame = new Phaser.Class({
 		btn1.setInteractive({ cursor: 'pointer' });
 		btnC.setInteractive({ cursor: 'pointer' });
 		btnS.setInteractive({ cursor: 'pointer' });
+		this.input.keyboard.on('keydown', function (event) {
+			gameA_progress1(3);
+		});
 	},
 
 	updateSystemLog: function ()
@@ -93,9 +120,9 @@ var SceneBinaryGame = new Phaser.Class({
 		for(obj of gtc.list()){
 			var ETA = Math.round((obj.timestamp + obj.delay - new Date().getTime())/1000);
 			if(obj.data =="Transmission failed: connection lost\n(Earth out of sight)"){
-				systemLogText.setText(systemLogText.text+obj.data+"\n");
+				systemLogText.setText(systemLogText.text+obj.data+"\n\n");
 			}else{
-				systemLogText.setText(systemLogText.text+obj.data+"\t\tETA: "+ETA+"sec\n");
+				systemLogText.setText(systemLogText.text+obj.data+"\t\tETA: "+ETA+"sec\n\n");
 			}			
 		}
 
@@ -104,6 +131,22 @@ var SceneBinaryGame = new Phaser.Class({
 		}else{
 			transmitTimeText.setText("No Connection")
 		}
+
+		baseStatText.setText("Base Electrical Power Storage: 27%\n\nMars-Earth Communication Signal: BAD\n\nCurrent Distance to Earth: "+StarmapDATA.EMdistance+" AU")
+
+		if(currentGameProgress >= 15){
+			OSText.setText(gameA_OS5);
+			localStorage.setItem("currentGameProgress", currentGameProgress);
+		}else if(currentGameProgress>=13){
+			OSText.setText(gameA_OS4);
+			localStorage.setItem("currentGameProgress", currentGameProgress);
+		}else if(currentGameProgress >= 10){
+			OSText.setText(gameA_OS3);
+			localStorage.setItem("currentGameProgress", currentGameProgress);
+		}else if (currentGameProgress == 9){
+			OSText.setText(gameA_OS2);
+		}
+		
 	}
 
 });

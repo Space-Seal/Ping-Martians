@@ -46,7 +46,7 @@ var StarmapDATA = {
 
 	epochStart:1600000000000,
 	epochdt: 2, //ms
-	planet_timescale: 0.00007,
+	planet_timescale: 0.007,
 	// planet_timescale: 0.007,
 	au2screen: 200,
 	deg2rad: 0.017444,
