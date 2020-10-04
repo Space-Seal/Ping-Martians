@@ -43,7 +43,7 @@ var SceneStoryA1 = new Phaser.Class({
 			this.scene.transition({ target: 'sceneGameC', duration: 0});
 		}, this);
 		machine2.on('pointerdown', function (event) {
-			this.scene.transition({ target: 'sceneMachine2', duration: 0});
+			this.scene.transition({ target: 'sceneEmail', duration: 0});
 		}, this);
 		machine3.on('pointerdown', function (event) {
 			this.scene.transition({ target: 'sceneMachine3', duration: 0});
