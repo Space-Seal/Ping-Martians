@@ -95,9 +95,12 @@ var SceneBinaryGame = new Phaser.Class({
 		}, this);
 		btnS.on('pointerdown', function (event) {
 			if (CalcRemainTime() != 0){
-				gtc.add('gameA', CalcRemainTime()*10, inputVal, function(data){if(data == "> 11011"){console.log('success');currentGameProgress=15;}else{console.log('fail');currentGameProgress=13;}})
-			}else{
-				gtc.add('gameA',10000, "Transmission failed: connection lost\n(Earth out of sight)", function(data){})
+				if(inputVal.length>7){
+					gtc.add('gameA',10000, "Transmission failed:\n insufficient bandwidth\n (Message too long)", function(data){});
+				}else{
+					gtc.add('gameA', CalcRemainTime()*10, inputVal, function(data){if(data == "> 11011"){console.log('success');currentGameProgress=15;}else{console.log('fail');currentGameProgress=13;}})
+			}}else{
+				gtc.add('gameA',10000, "Transmission failed: connection lost\n(Earth out of sight)", function(data){});
 			}
 
 			inputVal = "> ";
@@ -119,7 +122,7 @@ var SceneBinaryGame = new Phaser.Class({
 		systemLogText.setText("");
 		for(obj of gtc.list()){
 			var ETA = Math.round((obj.timestamp + obj.delay - new Date().getTime())/1000);
-			if(obj.data =="Transmission failed: connection lost\n(Earth out of sight)"){
+			if(obj.data.length>10){
 				systemLogText.setText(systemLogText.text+obj.data+"\n\n");
 			}else{
 				systemLogText.setText(systemLogText.text+obj.data+"\t\tETA: "+ETA+"sec\n\n");
@@ -127,7 +130,7 @@ var SceneBinaryGame = new Phaser.Class({
 		}
 
 		if (CalcRemainTime() != 0){
-			transmitTimeText.setText("Estimated reply time: " + Math.floor(CalcRemainTime())+" sec")
+			transmitTimeText.setText("Estimated reply time: " + Math.round(CalcRemainTime())+" sec")
 		}else{
 			transmitTimeText.setText("No Connection")
 		}
