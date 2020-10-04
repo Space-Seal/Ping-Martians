@@ -10,7 +10,6 @@ var config = {
 		}
 	},
 	scene: [SceneWelcome, SceneBinaryGame, SceneWelcomeVideo, SceneGameC, SceneStoryA1, SceneMachine1, SceneMachine2, SceneMachine3, SceneStarmap,SceneEmail,SceneInfopage],
-	//scene: [SceneBinaryGame, SceneWelcome, SceneWelcomeVideo, SceneGameC, SceneStoryA1, SceneMachine1, SceneMachine2, SceneMachine3, SceneStarmap],
 	dom: {createContainer: true}
 };
 
