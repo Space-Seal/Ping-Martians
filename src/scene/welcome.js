@@ -24,7 +24,7 @@ var SceneWelcome = new Phaser.Class({
 		this.tweens.add({'targets': logo, 'y': 250, 'duration': 4000});
 		btn.once('pointerdown', function (event) {
 			//this.scene.transition({ target: 'sceneGameC', duration: 0});
-			this.tweens.add({targets: bg, 'scale': 1.3, 'x': -560, 'y': -1900, 'alpha': 0,'duration': 6000}).on('complete', () => {this.scene.transition({ target: 'sceneWelcomeVideo', duration: 0})})
+			this.tweens.add({targets: bg, 'scale': 1.3, 'x': -560, 'y': -1900, 'alpha': 0,'duration': 6000}).on('complete', () => {this.scene.transition({ target: 'sceneEmail', duration: 0})})
 			this.tweens.add({'targets': logo, 'alpha': 0, 'duration': 1000});
 		}, this);
 	}
