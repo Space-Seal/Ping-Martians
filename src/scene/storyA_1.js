@@ -46,7 +46,7 @@ var SceneStoryA1 = new Phaser.Class({
 			this.scene.transition({ target: 'sceneEmail', duration: 0});
 		}, this);
 		machine3.on('pointerdown', function (event) {
-			this.scene.transition({ target: 'sceneMachine3', duration: 0});
+			this.scene.transition({ target: 'sceneInfopage', duration: 0});
 		}, this);
 		obapp.on('pointerdown', function (event) {
 			this.scene.transition({ target: 'sceneStarmap', duration: 0});
