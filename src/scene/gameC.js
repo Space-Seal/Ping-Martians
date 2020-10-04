@@ -1,4 +1,5 @@
 var msgBoxText;
+var repliedText;
 var SceneGameC = new Phaser.Class({
 
 	Extends: Phaser.Scene,
@@ -28,20 +29,21 @@ var SceneGameC = new Phaser.Class({
 		    loop: true
 		});
 
+		if (localStorage.getItem("inputNum") == null){
+			inputNum = "> ";	//first played, init
+		}else{
+			var inputNum = localStorage.getItem("inputNum");
+		}	
+
 		var bg_gameC = this.add.image(0, 0, 'bg_gameC').setOrigin(0).setScale(0.711);
 		var btnExit = this.add.rectangle(1280, 60, 20, 20, 0xff0000, 0);
 		var btnC = this.add.rectangle(280, 720, 80, 40, 0xff0000, 0);
 		var btnS = this.add.rectangle(1210, 720, 80, 40, 0xff0000, 0);
 
-		if (localStorage.getItem("inputNum") == null){
-			inputNum = "> ";	//first played, init
-		}else{
-			var inputNum = localStorage.getItem("inputNum");
-		}		
-		var text2Send = this.add.text(280, 600, inputNum,{'fontSize': '16px', 'color': '#fff'});
-		msgBoxText = this.add.text(280, 200, "",{'fontSize': '16px', 'color': '#fff'}).setOrigin(0, 0);
+		var text2Send = this.add.text(250, 600, inputNum,{'fontSize': '16px', 'color': '#fff'}).setOrigin(0, 0);
+		msgBoxText = this.add.text(1200, 400, "",{'fontSize': '16px', 'color': '#fff'}).setOrigin(1, 0);
+		repliedText = this.add.text(250, 250, gameC_MSG1, {'backgroundColor': '#fff', 'fontStyle':'bold', 'fontSize': '16px', 'color': '#000'}).setOrigin(0, 0);
 		transmitTimeText = this.add.text(1030, 170, "Estimated reply time:",{'fontSize': '12px', 'color': '#fff'}).setOrigin(0, 0);
-		
 		// event handles
 		this.input.keyboard.on('keydown', function (event) {
 			if(event.key.length<2){

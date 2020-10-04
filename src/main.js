@@ -9,8 +9,8 @@ var config = {
 			gravity: { y: 200 }
 		}
 	},
-	//scene: [SceneWelcome, SceneBinaryGame, SceneWelcomeVideo, SceneGameC, SceneStoryA1, SceneMachine1, SceneMachine2, SceneMachine3, SceneStarmap],
-	scene: [SceneBinaryGame, SceneWelcome, SceneWelcomeVideo, SceneGameC, SceneStoryA1, SceneMachine1, SceneMachine2, SceneMachine3, SceneStarmap],
+	scene: [SceneWelcome, SceneBinaryGame, SceneWelcomeVideo, SceneGameC, SceneStoryA1, SceneMachine1, SceneMachine2, SceneMachine3, SceneStarmap],
+	//scene: [SceneGameC, SceneWelcome, SceneWelcomeVideo, SceneBinaryGame, SceneStoryA1, SceneMachine1, SceneMachine2, SceneMachine3, SceneStarmap],
 	dom: {createContainer: true}
 };
 
