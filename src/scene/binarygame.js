@@ -98,7 +98,7 @@ var SceneBinaryGame = new Phaser.Class({
 				if(inputVal.length>7){
 					gtc.add('gameA',10000, "Transmission failed:\n insufficient bandwidth\n (Message too long)", function(data){});
 				}else{
-					gtc.add('gameA', CalcRemainTime()*1000, inputVal, function(data){if(data == "> 11011"){console.log('success');currentGameProgress=15;}else{console.log('fail');currentGameProgress=13;}})
+					gtc.add('gameA', CalcRemainTime()*1000/transmitTimeAcc, inputVal, function(data){if(data == "> 11011"){console.log('success');currentGameProgress=15;}else{console.log('fail');currentGameProgress=13;}})
 			}}else{
 				gtc.add('gameA',10000, "Transmission failed: connection lost\n(Earth out of sight)", function(data){});
 			}

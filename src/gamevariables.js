@@ -53,3 +53,6 @@ var gameC_MSG3 = "??\n\n(001)I'm fine\n(002)I'm worried\n(003)I'm happy"
 var gameC_MSG4 = "Just remember that I'm always by your side. I love you.\n\n (001)Love you, too."
 var gameC_MSG5 = ":(\n\n(001)Love you, too."
 var gameC_MSG6 = "Hope that the communication will be upgraded soon."
+
+var transmitTimeAcc = 1;
+
