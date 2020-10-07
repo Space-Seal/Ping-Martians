@@ -94,8 +94,15 @@ var CalcRemainTime = () => {
    	StarmapDATA.EMdistance = distanceofpoints(StarmapDATA.earth,StarmapDATA.mars);
    	StarmapDATA.EMdistance = Math.round(StarmapDATA.EMdistance*100 / StarmapDATA.au2screen)/100;
 
-   	if(angleofpoints(StarmapDATA.sun,StarmapDATA.mars,StarmapDATA.earth) <= 150 && angleofpoints(StarmapDATA.mars,StarmapDATA.earth,StarmapDATA.base) <= 150)
-		return 2*StarmapDATA.EMdistance * StarmapDATA.au2lightsec;
+   	if(angleofpoints(StarmapDATA.sun,StarmapDATA.mars,StarmapDATA.earth) <= 150)
+   	{
+   		if(angleofpoints(StarmapDATA.mars,StarmapDATA.earth,StarmapDATA.base) <= 150 || currentGameProgress >= 30)
+   		{
+   			return 2*StarmapDATA.EMdistance * StarmapDATA.au2lightsec;
+   		}
+   		else
+   			return 0;
+   	}
 	else
 		return 0;
 };
@@ -214,12 +221,14 @@ var SceneStarmap = new Phaser.Class({
 	   	StarmapDATA.base.obj = this.add.sprite(StarmapDATA.base.x, StarmapDATA.base.y, 'base');
 	   	StarmapDATA.base.obj.setScale(0.07,0.07);
 
-	   	//print satellite
-	   	StarmapDATA.sat.x = StarmapDATA.mars.x;
-	   	StarmapDATA.sat.y = StarmapDATA.mars.y;
-	   	StarmapDATA.sat.obj = this.add.sprite(StarmapDATA.sat.x, StarmapDATA.sat.y, 'sat');
-	   	StarmapDATA.sat.obj.setScale(0.1,0.1).setOrigin(0.6,0.6);
-
+	   	if(currentGameProgress >= 30)
+		{
+		   	//print satellite
+		   	StarmapDATA.sat.x = StarmapDATA.mars.x;
+		   	StarmapDATA.sat.y = StarmapDATA.mars.y;
+		   	StarmapDATA.sat.obj = this.add.sprite(StarmapDATA.sat.x, StarmapDATA.sat.y, 'sat');
+		   	StarmapDATA.sat.obj.setScale(0.1,0.1).setOrigin(0.6,0.6);
+		}
 
 		btnExit.on('pointerdown', function (event) {
 			this.scene.transition({ target: 'sceneStoryA1', duration: 0});
@@ -253,14 +262,15 @@ var SceneStarmap = new Phaser.Class({
 	   	StarmapDATA.base.y = StarmapDATA.mars.y + StarmapDATA.base.r * StarmapDATA.au2screen * Math.sin(epoch2rad(epochms,StarmapDATA.base.angvel));
 
 	   	StarmapDATA.base.obj.angle = (-1)*(epochms - StarmapDATA.epochStart) * StarmapDATA.base.spinRate * StarmapDATA.planet_timescale - StarmapDATA.base.angoffset; //counter clock wise
+	   	if(currentGameProgress >= 30)
+		{
+		   	StarmapDATA.sat.x = StarmapDATA.mars.x;
+		   	StarmapDATA.sat.y = StarmapDATA.mars.y;
 
-	   	StarmapDATA.sat.x = StarmapDATA.mars.x;
-	   	StarmapDATA.sat.y = StarmapDATA.mars.y;
+		   	StarmapDATA.sat.obj.angle = (-1)*(epochms - StarmapDATA.epochStart) * StarmapDATA.sat.spinRate * StarmapDATA.planet_timescale - StarmapDATA.sat.angoffset; //counter clock wise
 
-	   	StarmapDATA.sat.obj.angle = (-1)*(epochms - StarmapDATA.epochStart) * StarmapDATA.sat.spinRate * StarmapDATA.planet_timescale - StarmapDATA.sat.angoffset; //counter clock wise
-
-	   	StarmapDATA.sun.obj.angle = (-1)*(epochms - StarmapDATA.epochStart) * StarmapDATA.sun.spinRate * StarmapDATA.planet_timescale; //counter clock wise
-
+		   	StarmapDATA.sun.obj.angle = (-1)*(epochms - StarmapDATA.epochStart) * StarmapDATA.sun.spinRate * StarmapDATA.planet_timescale; //counter clock wise
+		}
 	   	StarmapDATA.EMdistance = Phaser.Math.Distance.BetweenPoints(StarmapDATA.earth.obj,StarmapDATA.base.obj);
 	   	StarmapDATA.EMdistance = Math.round(StarmapDATA.EMdistance*100 / StarmapDATA.au2screen)/100;
 
@@ -309,8 +319,11 @@ var SceneStarmap = new Phaser.Class({
 	   	StarmapDATA.mars.obj.y = StarmapDATA.mars.y;
 	   	StarmapDATA.base.obj.x = StarmapDATA.base.x;
 	   	StarmapDATA.base.obj.y = StarmapDATA.base.y;
-	   	StarmapDATA.sat.obj.x = StarmapDATA.sat.x;
-	   	StarmapDATA.sat.obj.y = StarmapDATA.sat.y;
+	   	if(currentGameProgress >= 30)
+		{
+		   	StarmapDATA.sat.obj.x = StarmapDATA.sat.x;
+		   	StarmapDATA.sat.obj.y = StarmapDATA.sat.y;
+		}
 	}
 
 });
