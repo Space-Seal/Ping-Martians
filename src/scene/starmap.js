@@ -271,7 +271,7 @@ var SceneStarmap = new Phaser.Class({
 
 		   	StarmapDATA.sun.obj.angle = (-1)*(epochms - StarmapDATA.epochStart) * StarmapDATA.sun.spinRate * StarmapDATA.planet_timescale; //counter clock wise
 		}
-	   	StarmapDATA.EMdistance = Phaser.Math.Distance.BetweenPoints(StarmapDATA.earth.obj,StarmapDATA.base.obj);
+	   	StarmapDATA.EMdistance = Phaser.Math.Distance.BetweenPoints(StarmapDATA.earth.obj,StarmapDATA.mars.obj);
 	   	StarmapDATA.EMdistance = Math.round(StarmapDATA.EMdistance*100 / StarmapDATA.au2screen)/100;
 
 	   	//Update Distance
@@ -296,6 +296,7 @@ var SceneStarmap = new Phaser.Class({
 	    timeString = hours + ":" + minutes + ":" + seconds;
 
 	    timeText.setText(timeString);
+	    // console.log(currentGameProgress);
 	    // console.log(StarmapDATA.earth.obj.angle);
 	    // console.log(callbackcRemainTime());
 	    // console.log(angleofpoints(StarmapDATA.sun,StarmapDATA.mars,StarmapDATA.earth));
